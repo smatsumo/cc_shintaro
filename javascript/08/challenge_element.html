@@ -1,0 +1,37 @@
+<!--要素の中にどうやって名前とURLを含めるのか分からない。-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>要素の作成・追加</title>
+   <script>
+       function add_URL() {
+           // a要素を作成
+           var element_a = document.createElement('a');
+           
+           var link = document.getElementById('link');
+           var url = document.getElementById('url');
+           element_a.innerHTML = link.value;
+           element_a.??=url.value;
+           var box = document.getElementById('box');
+           box.appendChild(element_a);
+       }
+       window.onload = function() {
+           var add = document.getElementById('add');
+           add.addEventListener('click', add_URL, false);
+       }
+   </script>
+</head>
+<body>
+    <p>
+           リンク名:
+           <input type="text" name="link" id='link'>
+    </p>
+    <p>
+           URL:
+           <input type="text" name="url" id='url'>
+    </p>
+   <button id="add">リンクを追加</button>
+   <div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>関数課題</title>
+</head>
+<body>
+   <script>
+       // 税抜き価格を定義
+       var price = 100;
+ 
+       // 税込み価格を計算
+       including_tax(price);
+ 
+       // 税込み価格を書き出し
+       document.write('税込み価格は' + price + 'です');
+ 
+       // 関数including_tax
+       function including_tax(i){
+           price=i*1.08;
+       }
+ 
+   </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>要素の作成・追加</title>
+   <script>
+   // 変数を定義
+   var interval_id;
+   var start_flag = false;  // スタート処理中はtrue
+   function start_flash_text() {
+     // 停止しているときのみ、スタート処理を開始(二重クリック防止)
+     if (start_flag === false) {
+       // 1秒ごとにflash_textを実行
+       interval_id = setInterval(flash_text, 1000);
+       start_flag = true;
+     }
+   }
+   function flash_text() {
+     var flash = document.getElementById('flash');
+     // p要素の文字色を赤か青に変更
+     if (flash.style.color === 'red') {
+       flash.style.color = 'blue';
+     } else {
+       flash.style.color = 'red';
+     }
+   }
+   function stop_flash_text() {
+     // setIntervalによる繰り返し動作を停止
+     clearInterval(interval_id);
+     start_flag = false;
+   }
+   window.onload = function() {
+     var start = document.getElementById('start');
+     start.addEventListener('click', start_flash_text, false);
+     var stop = document.getElementById('stop');
+     stop.addEventListener('click', stop_flash_text, false);
+   }
+   </script>
+</head>
+<body>
+   <p id="flash">flash text</p>
+   <button id="start">start</button>
+   <button id="stop">stop</button>
+</body>
+</html>

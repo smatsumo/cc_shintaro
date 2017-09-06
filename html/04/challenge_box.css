@@ -1,0 +1,28 @@
+/*左端に詰める方法が分からない。背景色のついた範囲をクリックさせる方法とは？labelを使うのか？*/
+html, body, h1, ul,li, a {
+   margin-right: 0px;
+   padding:0px;
+   
+}
+
+body{
+    margin:0px;
+}
+
+ul{
+    list-style:none;
+}
+
+li{
+    text-align: center;
+    background: orange;
+    margin-top: 10px;
+    margin-bottom:10px;
+    width: 25%;
+    margin-right: auto;
+
+}
+
+a{
+    display:block;
+}

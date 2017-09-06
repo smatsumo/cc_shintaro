@@ -1,0 +1,23 @@
+/*それぞれの文章の行間を大きくとる（画像では通常の160%）？？*/
+div{
+    border: solid 3px orange;
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+a{
+    border: solid 3px blue;
+    font-weight:900;
+    text-align: center;
+    display:block;
+    text-decoration:none;
+}
+
+p{
+    line-height:160%;
+}

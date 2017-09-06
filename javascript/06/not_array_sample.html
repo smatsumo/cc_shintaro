@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>課題</title>
+    <script>
+        var data = [59, 39, 100, 2, 15, 40, 84, 97];
+ 
+        // 配列dataの先頭(59)の値を削除
+        data.splice(0,1);
+ 
+        // 配列dataの最後(97)の値を削除
+        data.splice(data.length-1,1);
+        // for文により配列dataの中身を表示
+        for(var i=0;i<data.length;i++){
+           document.write("<p>"+data[i]+"</p>");
+       }
+ 
+    </script>
+</head>
+<body>
+</body>
+</html>

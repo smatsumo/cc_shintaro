@@ -1,0 +1,64 @@
+/*
+一番外側のボックスを中央に寄せ、背景色をつけて内側に上下左右50pxの余白を取る
+一番外側のボックスの幅は500pxにし、ブラウザの上下に余白ができないようにする
+
+*/
+article{
+    font-size:16px;
+}
+h1{
+    font-size:30px;
+}
+h2{
+    font-size:25px;
+}
+.family {
+   color: red;
+}
+.woman {
+   background: pink;
+}
+
+ul{
+    list-style:square;
+    
+}
+li{
+    margin-bottom:5px;
+}
+
+dt{
+    font-weight:900;
+    border-left: solid 10px orange;
+    border-bottom: dotted 5px blue;
+}
+
+.back{
+    background:orange;
+    display:block;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.sec1{
+    border: solid 2px red;
+    margin-bottom:30px;
+}
+
+.sec2{
+    border: solid 2px blue;
+}
+
+div{
+    padding: 50px;
+    background:grey;
+    width:400px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+section{
+    background:white;
+    
+}

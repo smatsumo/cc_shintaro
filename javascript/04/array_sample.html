@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>配列の使用例(配列利用)</title>
+</head>
+<body>
+   <script>
+       var data = [55, 100, 38, 40, 83,95];
+       var sum = 0;
+ 
+       for (var i = 0; i < data.length; i++) {
+           document.write('<p>各点数: ' + data[i] + '点</p>');
+           sum += data[i];
+       }
+ 
+       var ave = sum / data.length;
+       document.write('<p>平均点' + ave + '点</p>');
+   </script>
+</body>
+</html>

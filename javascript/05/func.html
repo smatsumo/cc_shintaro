@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>ユーザー定義関数</title>
+</head>
+<body>
+   <script>
+       function hello(){
+           document.write('<p>hello関数: hello</p>');
+       }
+ 
+       function hello_name(name){
+           document.write('<p>hello_name関数: hello ' + name + '</p>');
+       }
+ 
+       function return_hello_name(name){
+           var str = '<p>return_hello_name関数: hello ' + name + '</p>';
+           return str;
+       }
+ 
+       // hello関数実行
+       hello();
+       // hello_name関数実行
+       hello_name('山田');
+       // return_hello_name関数実行
+       var return_hello_name = return_hello_name('鈴木');
+       document.write(return_hello_name);
+   </script>
+</body>
+</html>

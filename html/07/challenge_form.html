@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>form</title>
+</head>
+<body>
+    <h1>ITアンケート</h1>
+    <form action="#">
+        <p>
+            <label for="name">お名前</label>
+            <input type="text" name="name" id="name">
+        </p>
+        
+        <p>
+            <label for="mail">メールアドレス</label>
+            <input type="email" name="mail" id="mail">
+        </p>
+        
+        <p>
+            <label for="number">電話番号</label>
+            <input type="text" name="number" id="number">
+        </p>
+        
+        <p>
+           現在のHTML理解度を教えてください。
+           <label><input type="radio" name="html_eval" value="h_low">低い</label>
+           <label><input type="radio" name="html_eval" value="h_mid">普通</label>
+           <label><input type="radio" name="html_eval" value="h_high">高い</label>
+       </p>
+       
+       <p>
+           現在のCSS理解度を教えてください。
+           <label><input type="radio" name="css_eval" value="c_low">低い</label>
+           <label><input type="radio" name="css_eval" value="c_mid">普通</label>
+           <label><input type="radio" name="css_eval" value="c_high">高い</label>
+       </p>
+       
+       <p>
+           聞いたことがあるプログラミング言語を選択してください（複数選択可）
+           <label><input type="checkbox" name="language" value="1">C</label>
+           <label><input type="checkbox" name="language" value="1">Java</label>
+           <label><input type="checkbox" name="language" value="1">PHP</label>
+           <label><input type="checkbox" name="language" value="1">Ruby</label>
+           <label><input type="checkbox" name="language" value="1">Javascript</label>
+        </p>
+        
+        <p>
+            <input type="submit" value="送信">
+        
+        </p>
+    </form>
+</body>
+</html>

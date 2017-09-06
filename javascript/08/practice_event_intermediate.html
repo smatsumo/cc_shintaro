@@ -1,0 +1,41 @@
+<!--要素の中にどうやって名前とURLを含めるのか分からない。-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>practice_event</title>
+   <script>
+       //var interval_id;
+       var i;
+       function start_display(){
+            i=0;
+            setInterval(display_text, 2000);
+       }
+       
+       function display_text() {
+           
+           var text = document.getElementById('text').value;
+           if(i<=text.length){
+                var res = text.substr(0,i);
+                var box = document.getElementById('box');
+                box.innerHTML=res;
+                i++;
+           }
+           
+       }
+       
+       
+       window.onload = function() {
+           var add = document.getElementById('add');
+           add.addEventListener('click', start_display, false);
+       }
+   </script>
+</head>
+<body>
+    <p>
+           <input type="text" name="text" id='text'>
+    </p>
+   <button id="add">1文字ずつ追加</button>
+   <p id="box"></p>
+</body>
+</html>

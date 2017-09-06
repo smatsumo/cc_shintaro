@@ -1,0 +1,56 @@
+#large_block {
+   width: 500px;
+   height: 200px;
+   border: solid 2px;
+}
+ 
+.blockA {
+   width: 250px;
+   height: 50px;
+   background-color: #ff0000;
+   float:left;
+}
+ 
+.blockB {
+   width: 250px;
+   height: 50px;
+   background-color: #00ff00;
+   float: left
+}
+ 
+.blockC {
+   width: 100px;
+   height: 100px;
+   background-color: #0000ff;
+   float:left;
+}
+ 
+.blockD {
+   width: 250px;
+   height: 50px;
+   background-color: #ffff00;
+   float:right;
+}
+ 
+.blockE {
+   width: 250px;
+   height: 50px;
+   background-color: #ff00ff;
+   float: right;
+}
+ 
+.blockF {
+   width: 100px;
+   height: 50px;
+   background-color: #ffffff;
+   float: left;
+   clear: both;
+}
+ 
+.blockG {
+   width: 400px;
+   height: 50px;
+   background-color: #00ffff;
+   float: left;
+   clear: right;
+}

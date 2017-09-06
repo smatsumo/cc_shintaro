@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>イベントハンドラ</title>
+</head>
+<body>
+   <button id="alert">アラート</button>
+   <script>
+       function event_alert(){
+           alert("ボタンが押されました");
+       }
+       var button = document.getElementById("alert");
+       button.addEventListener("click", event_alert, false);
+   </script>
+</body>
+</html>

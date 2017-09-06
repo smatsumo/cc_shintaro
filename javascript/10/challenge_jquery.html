@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>jquery_Timer</title>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script>
+   <script>
+   // 変数を定義
+   var interval_id;
+   var start_flag = false;  // スタート処理中はtrue
+   var cur_time=180;
+   
+   function start_time() {
+     // 停止しているときのみ、スタート処理を開始(二重クリック防止)
+     if (start_flag === false&&cur_time!=0) {
+       // 1秒ごとにcoumt_timeを実行
+       interval_id = setInterval(count_time, 1000);
+       start_flag = true;
+     }
+   }
+   function count_time() {
+     cur_time--;
+     var min = Math.floor(cur_time/60);
+     var sec = cur_time%60;
+     var res_sec =sec;
+     if(sec<10){
+         res_sec='0'+sec;
+     }
+     if (cur_time===0){
+         $('#time').html("Time UP!!!");
+         stop_time();
+     } else {
+         $('#time').html(min+":"+res_sec);
+     }
+   }
+     
+     
+   function stop_time() {
+     // setIntervalによる繰り返し動作を停止
+     clearInterval(interval_id);
+     start_flag = false;
+   }
+   
+   function reset_time(){
+       clearInterval(interval_id);
+       start_flag = false;
+       $('#time').html('3:00');
+       cur_time=180;
+   }
+   
+   $(function() {
+     $('#start').click(start_time);
+     $('#stop').click(stop_time);
+     $('#reset').click(reset_time);
+   });
+   </script>
+</head>
+<body>
+   <p id="time">3:00</p>
+   <button id="start">start</button>
+   <button id="stop">stop</button>
+   <button id="reset">reset</button>
+</body>
+</html>

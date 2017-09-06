@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>実行タイミング</title>
+   <script>
+       function text_overwrite(){
+           var text = document.getElementById('text');
+           text.innerHTML = '書き換え完了';
+       }
+       window.onload = function () {
+           var button = document.getElementById('overwrite');
+           button.addEventListener('click', text_overwrite, false);
+       }
+   </script>
+</head>
+<body>
+   <p id="text">書き換え前</p>
+   <button id="overwrite">書き換え実行</button>
+</body>
+</html>

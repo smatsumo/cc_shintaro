@@ -1,0 +1,40 @@
+header, footer, nav, aside, article, section {
+   border: solid 1px;
+}
+img {
+   width: 300px;
+}
+
+body{
+   width:1006px;
+}
+
+header{
+   width: 1006px;
+   float: left;
+}
+
+nav{
+   float: left;
+   clear: both;
+   width:200px;
+   height: 350px;
+}
+
+article{
+   float: left;
+   width: 500px;
+   height: 350px;
+}
+
+aside{
+   float: left;
+   width:300px;
+   height: 350px;
+
+}
+
+footer{
+   clear: both;
+   width:1006px;
+}

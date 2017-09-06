@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>DOMからHTMLやCSSを操作</title>
+</head>
+<body>
+   <div>ボックス0</div>
+   <div id="box1">ボックス1</div>
+   <div id="box2">ボックス2</div>
+   <div id="box3">ボックス3</div>
+   <script>
+       var box1 = document.getElementById('box1'); // id="box1"の要素を取得
+       var box2 = document.getElementById('box2'); // id="box2"の要素を取得
+       var box3 = document.getElementById('box3'); // id="box3"の要素を取得
+       box1.innerHTML = '文字列を入れ替え'; // id="box1"の要素内容を変更
+       box2.innerHTML = '<a href="http://codecamp.jp/">CodeCamp</a>'; // id="box2"の要素内容を変更
+       box3.style.color = '#ff0000'; // id="box3"の要素CSSを変更
+   </script>
+</body>
+</html>

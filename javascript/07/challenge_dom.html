@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>challenge_dom</title>
+</head>
+<body>
+   <div id="large">
+       <div id="box1">1行目(赤文字)</div>
+       <div id="box2">2行目(白文字)</div>
+   </div>
+   <script>
+       // ここに追記
+       var lbox = document.getElementById('large');
+       var box1 = document.getElementById('box1');
+       var box2 = document.getElementById('box2');
+       lbox.style.background='black';
+       box1.style.color='red';
+       box1.style.fontSize='24px';
+       box2.style.color='white';
+   </script>
+</body>
+</html>

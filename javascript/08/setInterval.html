@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>一定間隔で繰り返し実行</title>
+   <script>
+       function count_time() {
+           var timer = document.getElementById('timer');
+           var date = new Date();
+           timer.innerHTML = date.toLocaleString();
+       }
+       window.onload = function() {
+           // 1秒(1000ミリ秒)ごとにcount_time関数を実行
+           setInterval(count_time, 1000);
+       }
+   </script>
+</head>
+<body>
+   <div id="timer"></div>
+</body>
+</html>

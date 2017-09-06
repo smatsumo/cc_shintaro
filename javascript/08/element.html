@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>要素の作成・追加</title>
+   <script>
+       function add_element() {
+           // p要素を作成
+           var element_p = document.createElement('p');
+           // 作成したp要素の内容を設定
+           element_p.innerHTML = 'p要素を追加しました';
+           var box = document.getElementById('box');
+           // div要素に作成したp要素を追加
+           box.appendChild(element_p);
+       }
+       window.onload = function() {
+           var add = document.getElementById('add');
+           add.addEventListener('click', add_element, false);
+       }
+   </script>
+</head>
+<body>
+   <button id="add">要素を追加</button>
+   <div id="box"></div>
+</body>
+</html>

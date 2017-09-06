@@ -1,0 +1,71 @@
+<!--time変数をうグローバルにするにはどうすればいいのか？-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>Timer</title>
+   <script>
+   // 変数を定義
+   var interval_id;
+   var start_flag = false;  // スタート処理中はtrue
+   //var time = document.getElementById('time');  なぜか使えない。
+   var cur_time=180;
+   
+   function start_time() {
+     // 停止しているときのみ、スタート処理を開始(二重クリック防止)
+     if (start_flag === false&&cur_time!=0) {
+       // 1秒ごとにcoumt_timeを実行
+       interval_id = setInterval(count_time, 1000);
+       start_flag = true;
+     }
+   }
+   function count_time() {
+     var time = document.getElementById('time');
+     cur_time--;
+     var min = Math.floor(cur_time/60);
+     var sec = cur_time%60;
+     var res_sec =sec;
+     if(sec<10){
+         res_sec='0'+sec;
+     }
+     if (cur_time===0){
+         time.innerHTML="Time UP!!!"
+         stop_time();
+     } else {
+     time.innerHTML=min+":"+res_sec;
+     }
+   }
+     
+     
+   function stop_time() {
+     // setIntervalによる繰り返し動作を停止
+     clearInterval(interval_id);
+     start_flag = false;
+   }
+   
+   function reset_time(){
+       var time = document.getElementById('time');
+       clearInterval(interval_id);
+       start_flag = false;
+       time.innerHTML="3:00";
+       cur_time=180;
+   }
+   
+   window.onload = function() {
+     var start = document.getElementById('start');
+     start.addEventListener('click', start_time, false);
+     var stop = document.getElementById('stop');
+     stop.addEventListener('click', stop_time, false);
+     var reset = document.getElementById('reset');
+     reset.addEventListener('click', reset_time, false);
+   }
+   </script>
+</head>
+<body>
+   <p id="time">3:00</p>
+   <button id="start">start</button>
+   <button id="stop">stop</button>
+   <button id="reset">reset</button>
+</body>
+</html>

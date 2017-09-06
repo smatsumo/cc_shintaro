@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="UTF-8">
+   <title>if</title>
+</head>
+<body>
+   <script>
+       // 0〜100のランダムな数字を取得
+       var rand = Math.floor(Math.random() * 101);
+       document.write('<p>rand: ' + rand + '</p>');
+       document.write('<p>rand >=80: ' + (rand >= 80) + '</p>');
+       document.write('<p>rand <=30: ' + (rand <= 30) + '</p>');
+
+       if (rand >= 80) {
+           document.write('<p>randは80以上</p>');
+       } else if (rand <= 30) {
+           document.write('<p>randは30以下</p>');
+       } else {
+           document.write('<p>randは30より大きく80より小さい</p>');
+       }
+   </script>
+</body>
+</html>

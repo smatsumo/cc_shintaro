@@ -1,0 +1,22 @@
+#large_block {
+   width: 400px;
+   height: 200px;
+   border: solid 2px;
+   display:flex;
+}
+ 
+.blockA {
+   width: 200px;
+   height: 50px;
+   background-color: #ff0000;
+   /*float: left;*/
+}
+ 
+.blockB {
+   width: 200px;
+   height: 50px;
+   background-color: #00ff00;
+   border: solid 2px;
+   /*float: left; 
+   margin-left:200px;*/
+}
