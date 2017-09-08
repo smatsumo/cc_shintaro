@@ -1,0 +1,10 @@
+puts("こんにちは".length)
+puts("Hello world".length)
+puts("Hello" + "Ruby")
+puts("Hello" + "World" + "!")
+str = "a/b/c/d/e/f/g"
+puts(str.delete("/"))
+puts(" Hello World ")
+puts(" Hello World ".strip)
+puts("hello world".upcase)
+puts("HELLO WORLD".downcase)
