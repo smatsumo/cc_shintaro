@@ -1,0 +1,17 @@
+<div class="new-tweet">
+  <!-- エラー内容を表示 -->
+  <div class="errors">
+    <% @errors.each do |error| %>
+    <p><%= error %></p>
+    <% end %>
+  </div>
+      <%= form_tag("/tweets/create") do %>   
+        <div class="text-wrap">
+            <input type="text" name="name" placeholder="ユーザー名" value="<%= params[:name] %>"/>  <!-- 値を保持 -->
+        </div>
+      <div class="textarea-wrap">
+        <textarea name="tweet" placeholder="つぶやきを140文字以内で記述"><%= params[:tweet] %></textarea>  <!-- 値を保持 -->
+      </div>
+      <input type="submit" value="送信" />
+      <% end %>
+</div>

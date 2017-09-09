@@ -1,0 +1,69 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f8fa;
+}
+header {
+  background-color: rgb(21, 44, 85);
+  color: white;
+  height: 70px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 70px;
+    a {
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+  ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin-right: 15px;
+      line-height: 70px;
+      a {
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+ 
+.top {
+  width: 60%;
+  padding: 15px 0;
+  margin: 0 auto;
+  h2 {
+    text-align: center;
+    font-size: 46px;
+    color: rgb(21, 44, 85);
+  }
+  .tweets {
+    ul {
+      li {
+        padding-right: 50px;
+        position: relative;
+        span {
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+}

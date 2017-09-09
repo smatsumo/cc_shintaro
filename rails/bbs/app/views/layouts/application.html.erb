@@ -9,6 +9,17 @@
   </head>
 
   <body>
+    <header>
+      <h1><%= link_to "ひとことBBS", "/" %></h1>
+      <ul>
+        <li>
+          
+          <%#<%= link_to "新規投稿", "/tweets" %>
+          <%= link_to "新規投稿", new_tweet_path %>
+
+        </li>
+      </ul>
+    </header>
     <%= yield %>
   </body>
 </html>
