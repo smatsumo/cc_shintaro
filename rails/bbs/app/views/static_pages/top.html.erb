@@ -9,8 +9,8 @@
     <ul>
       <% @tweets.each do |tweet| %>
       <li>
-        <%= tweet[0] %>: <%= tweet[1] %>
-        <span><%= tweet[2] %></span>
+        <%= tweet.name %>: <%= tweet.tweet %>
+        <span><%= tweet.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span>
       </li>
       <% end %>
     </ul>
