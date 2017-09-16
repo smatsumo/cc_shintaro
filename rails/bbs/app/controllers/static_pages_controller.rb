@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
     
     # csv = CSV.read('tmp/tweets.csv')
     # @tweets = csv
-    @tweets = Tweet.all   
+    @tweets = Tweet.all
+    @contacts=Contact.all
   end
 end
