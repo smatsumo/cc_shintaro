@@ -11,13 +11,13 @@
     <header class="global_header">
       <!-- ロゴ -->
       <div class="icon">
-        <a href="#">
+        <%= link_to top_path do %>
           <i class="fa fa-camera"></i>
-        </a>
+        <% end %>
       </div>
-      <a href="#">
+      <%= link_to top_path do %>
         <h1 class="logo">Photo</h1>
-      </a>
+      <% end %>
       <!-- 検索フォーム -->
       <form class="search">
         <input type="text" placeholder="検索ワードを入力" name="word" value="">
@@ -26,25 +26,35 @@
       <ul class="menu">
         <li>
           <!-- サインアウト -->
-          <a href="#">
+          <%= link_to sign_out_path do %>
             <i class="fa fa-sign-out"></i>
-          </a>
+          <% end %>
         </li>
         <li>
           <!-- プロフィールページ -->
-          <a href="#">
+          <%= link_to profile_path(current_user) do %>
             <i class="fa fa-user-o"></i>
-          </a>
+          <% end %>
         </li>
         <li>
           <!-- 投稿 -->
-          <a href="#">
+          <%= link_to new_post_path do %>
             <i class="fa fa-upload"></i>
-          </a>
+          <% end %>
         </li>
       </ul>
     </header>
+    <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        window.setTimeout(function() {
+            $(".alert").slideUp();
+        }, 3000);
+    </script>
+    <%#= yield %>
+    <%#script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script%>
   </body>
 </html>

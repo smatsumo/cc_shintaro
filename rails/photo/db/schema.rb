@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915105723) do
+ActiveRecord::Schema.define(version: 20170918025459) do
 
   create_table "access", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "access_datetime", comment: "アクセス日時"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20170915105723) do
     t.integer "salary"
   end
 
+  create_table "follows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "follow_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_user_id"], name: "index_follows_on_follow_user_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
+  end
+
   create_table "order_details", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "order_id"
     t.integer "product_id"
@@ -47,6 +56,41 @@ ActiveRecord::Schema.define(version: 20170915105723) do
   create_table "orders", primary_key: "order_id", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "customer_id"
     t.datetime "order_date"
+  end
+
+  create_table "post_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "post_id"
+    t.bigint "user_id"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
+  end
+
+  create_table "post_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "post_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_images_on_post_id"
+  end
+
+  create_table "post_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "post_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
+    t.index ["user_id"], name: "index_post_likes_on_user_id"
+  end
+
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "products", primary_key: "product_id", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -78,4 +122,11 @@ ActiveRecord::Schema.define(version: 20170915105723) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "follows", "users"
+  add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users"
+  add_foreign_key "post_images", "posts"
+  add_foreign_key "post_likes", "posts"
+  add_foreign_key "post_likes", "users"
+  add_foreign_key "posts", "users"
 end

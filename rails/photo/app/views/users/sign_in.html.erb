@@ -2,6 +2,7 @@
   <div class="contents">
     <div class="sign_in_form">
       <h1>Photo</h1>
+      <!--@userにてエラーが発生する-->
       <%= form_for @user, url: sign_in_path do |f| %>
         <div class="field">
           <%= f.email_field :email, placeholder: "メールアドレス" %>
@@ -13,7 +14,7 @@
       <% end %>
     </div>
     <div class="sign_in_link">
-      <p>アカウントをお持ちですか？ <a href="#">新規登録する</a></p>
+      <p>アカウントをお持ちですか？ <%= link_to '新規登録する', sign_up_path %> </p>
     </div>
   </div>
 </div>

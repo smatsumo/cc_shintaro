@@ -1,129 +1,123 @@
 <div class="top container">
-  <ul class="posts">
-    <!-- 投稿画像１つめ -->
-    <li>
-      <!-- 投稿者のアイコン -->
-      <div class="user">
-        <div class="icon image" style="background: url('https://dummyimage.com/200/df81a2/fff'); background-position: center; background-size: cover"></div>
-        <p><a href="#">渡辺はるか</a></p>
-      </div>
-      <!-- 投稿画像 -->
-      <div class="image_wrap">
-        <img src="https://dummyimage.com/600/6b6b6b/fff">
-      </div>
-      <!-- テキスト部分 -->
-      <div class="info">
-        <div class="action">
-          <a href="#">
-            <i class="fa fa-heart-o"></i><!-- いいねを押してない時のハート -->
-          </a>
-          <label for="post-comment-">
-            <i class="fa fa-comment-o"></i>
-          </label>
-          <a href="#">
-            <i class="fa fa-close"></i>
-          </a>
-        </div>
-        <div class="like">
-          <p>いいね 3件</p>
-        </div>
-        <!-- コメント部分 -->
-        <div class="comment">
-          <ul>
-            <!-- 投稿者のキャプション -->
-            <li>
-              <span class="user_name">渡辺はるか</span>
-              <span class="caption">はじめまして！</span>
-            </li>
-            <!-- 画像へのコメント -->
-            <li>
-              <span class="user_name">田中一郎</span>
-              <span class="caption">こんにちは〜</span>
-            </li>
-          </ul>
-          <!-- コメント入力部分 -->
-          <div class="text_wrap">
-            <form method="post" action="#">
-              <div class="field">
-                <input type="text" name="comment" id="post-comment-" placeholder="コメントを入力">
-                <input type="submit" value="送信">
-              </div>
-            </form>
+  <% if @posts.any? %>
+    <ul class="posts">
+      <div><%= page_entries_info @posts %></div>
+      <% @posts.each do |post| %>
+        <!-- 投稿画像-->
+        <li>
+          <!-- 投稿者のアイコン -->
+          <div class="user">
+            <div style="background: url('<%= image_url(post.user) %>'); background-position: center; background-size: cover" class="image"></div>
+            <p><%= link_to post.user.name, profile_path(post.user) %></p>
           </div>
-        </div>
-      </div>
-    </li>
-    <!-- 投稿画像２つめ -->
-    <li>
-      <!-- 投稿者のアイコン -->
-      <div class="user">
-        <div class="icon image" style="background: url('https://dummyimage.com/200/6eb7db/fff'); background-position: center; background-size: cover"></div>
-        <p><a href="#">山田次郎</a></p>
-      </div>
-      <!-- 投稿画像 -->
-      <div class="image_wrap">
-        <img src="https://dummyimage.com/600/6b6b6b/fff">
-      </div>
-      <!-- テキスト部分 -->
-      <div class="info">
-        <div class="action">
-          <a href="#">
-            <i class="fa fa-heart active"></i><!-- いいねを押した時のハート -->
-          </a>
-          <label for="post-comment-">
-            <i class="fa fa-comment-o"></i>
-          </label>
-        </div>
-        <div class="like">
-          <p>いいね 1件</p>
-        </div>
-        <!-- コメント部分 -->
-        <div class="comment">
-          <ul>
-            <!-- 投稿者のキャプション -->
-            <li>
-              <span class="user_name">山田次郎</span>
-              <span class="caption">Hello！</span>
-            </li>
-          </ul>
-          <!-- コメント入力部分 -->
-          <div class="text_wrap">
-            <form method="post" action="#">
-              <div class="field">
-                <input type="text" name="comment" id="post-comment-" placeholder="コメントを入力">
-                <input type="submit" value="送信">
+          <!-- 投稿画像 -->
+          <% post.post_images.each do |post_image| %>
+            <div class="image_wrap">
+              <%= image_tag "/images/#{post_image.name}" %>
+            </div>
+          <% end %>
+          <!-- テキスト部分 -->
+          <div class="info">
+            <div class="action">
+              <%= link_to like_post_path(post) do %>
+                <!--いいねが押されているか押されていないかで表示を変える-->
+                <i class="fa <%= post.like_from?(current_user)? "fa-heart active" : "fa-heart-o" %>"></i>
+              <% end %>
+              <label for="post-comment-">
+                <i class="fa fa-comment-o"></i>
+              </label>
+              <!--画像消去ボタン-->
+              <% if post.user_id == current_user.id %>
+                <%= link_to post_path(post), method: :delete do %>
+                  <i class="fa fa-close"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="like">
+              <p>いいね 1件</p>
+            </div>
+            <!-- コメント部分 -->
+            <div class="comment">
+              <ul>
+                <!-- 投稿者のキャプション -->
+                <% if post.caption.present? %>
+                  <% if false %>
+                  <li>
+                    <span class="user_name"><%= post.user.name %></span>
+                    <span class="caption"><%= post.caption %></span>
+                  </li>
+                  <% end %>
+                  <% post.post_comments.each do |post_comment| %>
+                    <li>
+                      <span class="user_name"><%= post_comment.user.name %></span>
+                      <span class="caption"><%= post_comment.comment %></span>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <!-- コメント入力部分 -->
+              <div class="text_wrap">
+                <%= form_for post.post_comments.new, url: comment_post_path(post) do |f| %>
+                  <div class="field">
+                    <%= f.text_field :comment, id: "post-comment-#{post.id}", placeholder: "コメントを入力" %>
+                    <%= f.submit "送信" %>
+                  </div>
+                <% end %>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <!-- おすすめユーザー -->
-  <div class="recommend">
-    <h2>おすすめ</h2>
-    <ul>
-      <li>
-        <a href="#">
-          <img src="https://dummyimage.com/200/f6d580/fff">
-          <p>田中一郎</p>
-        </a>
-        <a class="button" href="#">フォローする</a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="https://dummyimage.com/200/6eb7db/fff">
-            <p>山田次郎</p>
-        </a>
-        <a class="button" href="#">フォローする</a>
-      </li>
-      <li>
-        <a href="#">
-          <img src="https://dummyimage.com/200/cfe283/fff">
-          <p>山中三郎</p>
-        </a>
-        <a class="button" href="#">フォローする</a>
-      </li>
+        </li>
+      <% end %>
+      <div><%= paginate @posts %></div>
     </ul>
-  </div>
+  <% else %>
+    <p class="empty">投稿がありません。</p>
+  <% end %>
+  <!-- おすすめユーザー -->
+  <% if @recommends.any? %>
+    <div class="recommend">
+      <h2>おすすめ</h2>
+      <ul>
+        
+        <% @recommends.each do |user| %>
+          <li>
+            <%= link_to profile_path(user) do %>
+              <img src="<%= image_url(user) %>">
+              <p><%= user.name %></p>
+            <% end %>
+            <%# 「フォローボタンがエラーを起こしている為、コメントアウト中」 = link_to "フォローする", follow_path(user), class: "button" %>
+          </li>
+        <% end %>
+        
+        
+        
+        <%if false%>
+        <li>
+          <a href="#">
+            <img src="https://dummyimage.com/200/f6d580/fff">
+            <p>田中一郎</p>
+          </a>
+          <a class="button" href="#">フォローする</a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="https://dummyimage.com/200/6eb7db/fff">
+              <p>山田次郎</p>
+          </a>
+          <a class="button" href="#">フォローする</a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="https://dummyimage.com/200/cfe283/fff">
+            <p>山中三郎</p>
+          </a>
+          <a class="button" href="#">フォローする</a>
+        </li>
+        <%end%>
+        
+        
+        
+      </ul>
+    </div>
+  <% end %>
 </div>
