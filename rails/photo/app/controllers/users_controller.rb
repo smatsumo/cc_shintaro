@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :redirect_to_top_if_signed_in, only: [:sign_up, :sign_in]
 
   def top
-    byebug
     if params[:word].present?
       # キーワード検索処理
       @posts = Post.where("caption like ?", "%#{params[:word]}%").order("id desc").page(params[:page])
@@ -48,11 +47,14 @@ class UsersController < ApplicationController
   end
   
   def follower_list
+    @user = User.find(params[:id])
+    @users = User.where(id: Follow.where(follow_user_id: @user.id).pluck(:user_id))
   end
   def follow_list
     # プロフィール情報の取得
     @user = User.find(params[:id])
-    # ここに処理を実装
+    @users = User.where(id: Follow.where(user_id: @user.id).pluck(:follow_user_id))
+
   end
   
   # ユーザー登録ページ
@@ -63,6 +65,7 @@ class UsersController < ApplicationController
   end
    
   # ユーザー登録処理
+  #疑問点:photoのusers_controllerのsign_up_processを見て、名前等が入力されていなかった時のエラーがどこで処理されているのか分からなかった。
   def sign_up_process
     user = User.new(user_params) 
     #データベースへの保存の成否を判別している

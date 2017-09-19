@@ -1,0 +1,30 @@
+<div class="profile_edit container">
+ 
+  <%= form_for @user, url: profile_edit_path do |f| %>
+    <div class="field">
+      <%= f.label "名前" %>
+      <%= f.text_field :name, placeholder: "名前を入力して下さい。" %>
+    </div>
+    <div class="field">
+      <%= f.label :profile, "自己紹介文" %>
+      <%= f.text_field :profile, placeholder: "自己紹介をどうぞ" %>
+    </div>
+    <div class="field">
+      <%= f.label "パスワード" %>
+      <%= f.text_field :password, placeholder: "パスワードを更新しない場合は空白でお願いします。" %>
+    </div>
+    <div class="field">
+      <%= f.label "パスワード(確認)" %>
+      <%= f.text_field :password, placeholder: "同じパスワードを入力してください。" %>
+    </div>
+    <div class="field">
+      <label>プロフィール画像</label>
+      <div class="file_wrap">
+        <%= f.file_field :image %>
+      </div>
+    </div>
+    <div class="button_wrap">
+      <input type="submit" value="保存する" class="button">
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CodeCamp_EC</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+  </head>
+
+  <body class="logined">
+    <header class ="global_header">
+      <!--ECのタイトル兼トップへのリンク-->
+      <%= link_to top_path do %>
+        <h1 class="logo">CodeCamp_EC</h1>
+      <% end %>
+      <!-- 検索フォーム -->
+      <form class="search">
+        <input type="text" placeholder="検索ワードを入力" name="word" value="">
+      </form>
+      
+      <!--メニュー-->
+      <ul class="menu">
+        <li>
+        <!-- サインアウト -->
+          <%= link_to sign_out_path do %>
+            <i class="fa fa-sign-out"></i>
+          <% end %>
+        </li>  
+        <li>
+          <!--出品する-->
+          <p class="sell">
+            <%= link_to products_new_path do %>
+              出品する
+            <% end %>
+          </p>
+        </li>
+        <li>
+          <!--マイページ-->
+          <%= link_to profile_edit_path(current_user) do %>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+          <% end %>
+        </li>
+      </ul>
+
+    </header>  
+    <%= yield %>
+  </body>
+</html>
+
+
+
+

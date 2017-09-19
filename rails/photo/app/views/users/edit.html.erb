@@ -1,5 +1,6 @@
 <div class="profile_edit container">
-  <%= form_for @user, url: profile_edit_path, method: :post do |f| %>
+  <%#= form_for @user, url: profile_edit_path, method: :post do |f| %>
+  <%= form_for @user, url: profile_edit_path do |f| %>
     <div class="field">
       <%= f.label :name, "名前" %>
       <%= f.text_field :name, placeholder: "名前を入力して下さい。" %>

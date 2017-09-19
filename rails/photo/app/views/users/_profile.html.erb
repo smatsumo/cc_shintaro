@@ -19,8 +19,8 @@
       </div>
       <div class="status">
         <p class="posts_count">投稿数 <%= @user.posts.length %>件</p>
-        <p class="follower_count"><a href="#">フォロワー1人</a></p>
-        <p class="follow_count"><a href="#">3人をフォロー中</a></p>
+        <p class="follower_count"><%= link_to "フォロワー#{@user.followers.length}人", follower_list_path(@user) %>  </p>
+        <p class="follow_count"><%= link_to "#{@user.follows.length}人をフォロー中", follow_list_path(@user) %></p>
       </div>
       <div class="comment">
         <%= @user.comment %>
