@@ -1,11 +1,7 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
+//ここから先は編集の必要なし
 
 //サインインと登録部分
 .sign_up, .sign_in {
-  background: image-url("bg.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -73,61 +69,10 @@
   }
 }
 
-// プロフィール部分
-  .profile {
-    padding-top: 60px;
-    padding: 60px 40px 40px;
-    display: flex;
-    .image {
-      width: 200px;
-      margin-right: 50px;
-      >div {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-      }
-    }
-  }
-  
-  // 情報部分
-  .info {
-    flex: 1;
-    .status {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      display: flex;
-      p {
-        flex: 1;
-      }
-      a{
-        color: inherit;
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-    .name {
-      display: flex;
-      .actions {
-        a {
-          color: darken(gray, 10%);
-          border: 1px solid #eee;
-          padding: 8px 12px;
-          display: inline-block;
-          text-decoration: none;
-          border-radius: 3px;
-          margin-top: 5px;
-        }
-      }
-    }
-    h1 {
-      font-size: 32px;
-      line-height: 40px;
-      font-weight: 200;
-      margin-right: 30px;
-    }
-  }
+
+
+
+
   
   // プロフィール編集部分
 .profile_edit {
@@ -139,6 +84,12 @@
       width: 150px;
     }
     input[type="text"] {
+      width: 500px;
+      height: 30px;
+      font-size: 15px;
+      padding: 8px;
+    }
+    input[type="password"] {
       width: 500px;
       height: 30px;
       font-size: 15px;
@@ -172,3 +123,26 @@
     }
   }
 }
+
+  // プロフィール部分
+  .profile {
+    margin-top: 100px;
+    margin-left: 100px;
+    padding-top: 60px;
+    padding: 60px 40px 40px;
+    display: flex;
+    .image {
+      width: 200px;
+      margin-right: 50px;
+      >div {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+
+
+
+

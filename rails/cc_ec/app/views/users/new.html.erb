@@ -1,3 +1,42 @@
+<div class="profile_edit container">
+ 
+  <%= form_for @product, url: products_new_path do |f| %>
+    <div class="field">
+      <%= f.label "商品名" %>
+      <%= f.text_field :name, placeholder: "商品名を入力して下さい。" %>
+    </div>
+    <div class="field">
+      <%= f.label "説明" %>
+      <%= f.text_field :description, placeholder: "説明文を入力して下さい。" %>
+    </div>
+    <div class="field">
+      <%= f.label "カテゴリー" %>
+      <%= f.collection_select :category_id,@categories,:id,:name%>
+      <%#@category,{value},{text_name}%>
+    </div>
+    <div class="field">
+      <%= f.label "価格" %>
+      <%= f.text_field :price, placeholder: "価格を入力して下さい。" %>
+    </div>
+    
+    <label>画像1</label>
+      <div class="file_wrap">
+        <%= f.file_field :image1 %>
+      </div>
 
-<h1>Users_product_new</h1>
-<p>Find me in app/views/users/products/edit.html.erb</p>
+    
+      <label>画像2</label>
+      <div class="file_wrap">
+        <%= f.file_field :image2 %>
+      </div>
+
+      <label>画像3</label>
+      <div class="file_wrap">
+        <%= f.file_field :image3 %>
+      </div>
+
+    <div class="button_wrap">
+      <input type="submit" value="保存する" class="button">
+    </div>
+  <% end %>
+</div>

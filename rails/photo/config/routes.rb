@@ -27,8 +27,8 @@ Rails.application.routes.draw do
   end
   
   #ルーティングの順序に注意 理由が分からない。。。
-  get 'profile/edit', to:'users#edit',as: :profile_edit
-  post 'profile/edit', to:'users#update'
+  get 'profiles/edit', to:'users#edit',as: :profile_edit
+  post 'profiles/edit', to:'users#update'
   get 'profile/(:id)', to:'users#show',as: :profile
   
   get 'top', to:'users#top', as: :top

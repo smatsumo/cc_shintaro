@@ -125,11 +125,13 @@ class UsersController < ApplicationController
   end
   
   private
+  
   #プライベートを定義するとそれより以下の関数は全てプライベートになる
-  def user_params
-    params.require(:user).permit(:name, :email, :password)
-  end
-  # パラメータを取得
+  #def user_params
+  #  params.require(:user).permit(:name, :email, :password)
+  #end
+  
+  # パラメータを取得 [strong parameter] mass assignment 脆弱性
   def user_params
     params.require(:user).permit(:name, :email, :password, :comment)
   end
