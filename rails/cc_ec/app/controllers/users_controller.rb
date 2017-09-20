@@ -17,29 +17,20 @@ class UsersController < ApplicationController
   #商品出品処理
   def sell_item
     @user= current_user
-    upload_image(item_params[:image1])
-    #upload_image(item_params[:image2])
-    #upload_image(item_params[:image3])
-    upload_file_name1 = item_params[:image1].original_filename
-    #upload_file_name2 = item_params[:image2].original_filename
-    #upload_file_name3 = item_params[:image3].original_filename
+    #item_paramsはname,desciption,category_idとimage1,2,3などの実際の画像を保有している
+    #temp_paramsはimage1,image2,image3から名前を得て、実際のデータベース登録に必要.
     
-    
-    #別の変数に代入して変数でアップロードの処理をすれば解決する
-    item_params[:image1]=upload_file_name1
-    #item_params[:image2]=upload_file_name2
-    #item_params[:image3]=upload_file_name3
-
-    
-    
-    
-    
-    product= Product.new(item_params.merge({status: 1}))
-    if product.save
+    temp_params=upload_image_item(item_params)
+    #byebug
+    @product= Product.new(temp_params.merge({status: 1}))
+    #byebug
+    if @product.save
         #productテーブルへの登録成功
+        #byebug
         redirect_to top_path and return
       else
         #product_tableへの登録失敗の為、エラーをだす
+        #byebug
         flash[:danger] = "データベースへの登録に失敗しました"
         redirect_to products_new_path and return
     end
@@ -59,20 +50,21 @@ class UsersController < ApplicationController
       if new_pass == check_new_pass#新しいパスと確認パスが一致しているか確認
         #create new password
         temp_params = user_params
-        temp_params[:password] = new_pass
-        upload_profile
+        #user_params[:password]はメソッドで変数では無い為、user_params[:password]=new_passではエラーが発生する
+        password_md5 = User.generate_password(new_pass) 
+        temp_params[:password] = password_md5
+        update_profile(temp_params)
       else
         #output error
         flash[:danger] = "新規パスワードと確認用パスワードが不一致の為、更新出来ませんでした。"
-        redirect_to top_path and return
+        redirect_to profile_edit_path and return
       end
     else
         #keep old password and store to database
         #おそらくパスワードに対して何の処理もしなくて良いはず。
-        upload_profile
+        update_profile(user_params)
     end
     redirect_to top_path and return
-    
   end
   
   
@@ -119,6 +111,7 @@ class UsersController < ApplicationController
   
   def sign_up_process
     user = User.new(user_params)
+    #byebug
     if params[:user][:password]==params[:user][:check_password]
       if user.save
         #データベースへの登録成功
@@ -144,44 +137,61 @@ class UsersController < ApplicationController
   end
 
   def item_params
-    params.require(:product).permit(:name,:description,:price,:image1,:image2,:image3)
+    params.require(:product).permit(:name,:description,:price,:category_id,:image1,:image2,:image3)
   end
   
-  def upload_profile
+  #ユーザープロファイルのアップデート
+  def update_profile(new_user_params)
     upload_file = params[:user][:image]
-    update_image_profile(upload_file,user_params)
+    update_image_profile(upload_file,new_user_params)
   end
   
   #シンボルを渡したい場合はどうすれば良いか？ 現在はitemとuser_paramsの両方に対応している　
+  #プロファイルの中のイメージ画像をアップデートする
   def update_image_profile(file,new_params)
     if upload_image(file)
-      #商品の編集時にここの部分をimage1,image2,image3に対応させたい。　現在はプロフィールの編集のみ対応している。
-      current_user.update(new_params.merge({image: upload_file.original_filename}))
+      current_user.update(new_params.merge({image: file.original_filename}))
     else
       current_user.update(new_params)
     end
   end
-  
-  def update_image_item(file,new_params,imagex)
-    # type="image"であるもののnameの配列を受け取る
-    # ["image1", "image2", "image3"]
-    # names.eachでnameごとに if upload_image(name)
-    # アップロード成功時にはmerge用のハッシュに要素を追加する
-    # each終了後にupdate(new_params.merge(merge用のハッシュ))
-    if upload_image(file)
-      #商品の編集時にここの部分をimage1,image2,image3に対応させたい。　現在はプロフィールの編集のみ対応している。
-      current_user.update(new_params.merge({image1: upload_file.original_filename,image2: upload_file.original_filename,image3: upload_file.original_filename}))
-    else
-      current_user.update(new_params)
-    end
+
+  #出品した商品のイメージをアップロードする
+  def upload_image_item(image_files)
+    new_params=image_files
+    
+    #imageは実際の画像なのでファイルネームを取り出したい。
+    #image_files.each do |image|
+      # type="image"であるもののnameの配列を受け取る
+      # ["image1", "image2", "image3"]
+      # names.eachでnameごとに if upload_image(name)
+      # アップロード成功時にはmerge用のハッシュに要素を追加する
+      # each終了後にupdate(new_params.merge(merge用のハッシュ))
+      #if upload_image(image)
+        #アップロードに成功
+        #この処理を:image1,:image2,:image3で繰り返し行いたい
+        #new_params.merge({image1: image.original_filename})
+      #else
+        #アップロードに失敗
+      #end
+    #nd
+    
+    #if upload_image(image_files[:image1])
+    #  new_params[:image1]=image_files[:image1].original_filename
+      #new_params.merge({image1: image_files[:image1].original_filename})
+    #end
+    
+    
+    
+    
+    return new_params
   end 
   
-  #ファイルのアップロードだけの処理 true falseで戻り値を返してその結果によってデータベースへの登録処理を行いたい。
-  #もしtrueならデータベース登録処理をする
+
   def upload_image(file)
     upload_file=file
     if upload_file.present?
-      # あった場合はこの中の処理が実行される
+      #画像があった場合はこの中の処理が実行される
       upload_file_name = upload_file.original_filename
       output_dir = Rails.root.join('public', 'images')
       output_path = output_dir + upload_file_name
@@ -192,8 +202,5 @@ class UsersController < ApplicationController
     end
     return false
   end
-
   
 end
-
-
