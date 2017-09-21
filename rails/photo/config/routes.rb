@@ -22,7 +22,6 @@ Rails.application.routes.draw do
       get 'like', to: 'posts#like', as: :like
       #post 'like', to: 'posts#like', as: :like
       post 'comment', to: 'posts#comment', as: :comment
-      
     end
   end
   

@@ -1,0 +1,37 @@
+<div class="menu">
+    <ul>
+        <!--キーワード-->
+        <li>
+            <p>
+                <%= link_to name_search_path do %>
+                  出品する
+                <% end %>
+            </p>
+        </li>
+        <!--カテゴリー-->
+        <li>
+            <p>
+                <%= link_to category_seach_path do %>
+                    商品の一覧
+                <% end %>
+            <p>
+        </li>
+        <!--価格-->
+        <li>
+            <p>
+                <%= link_to price_search_path do %>
+                    出品中の商品
+                <% end %>
+            </p>
+        </li>
+        <!--並び替え-->
+        <li>
+            <p>
+                <%= link_to order_path do %>
+                    <h2>お気に入りの商品</h2>
+                <% end %>
+            </p>
+        </li>
+    </ul>
+</div>
+ 

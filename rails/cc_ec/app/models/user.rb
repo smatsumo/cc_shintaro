@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   #リレーション（データベース）
-  has_many :products
-  has_many :user_likes
+  has_many :products, dependent: :destroy
+  has_many :user_likes, dependent: :destroy
 
 
   # データの保存前に、パスワードを暗号化するメソッド(convert_password)を実行するよう設定
@@ -18,10 +18,19 @@ class User < ApplicationRecord
     salt = "h!hgamcRAdh38bajhvgai17ysvb"
     Digest::MD5.hexdigest(salt + password)
   end
+  
+  # 投稿が特定のユーザーにいいね！されているかどうかを判定
+  def check_like(user)
+    self.user_likes.exists?(user_id: user.id)
+  end
+  
   # バリデーション
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: true
   validates :password, presence: true, length:{minimum: 8}
+  
+  
+  
 end
 

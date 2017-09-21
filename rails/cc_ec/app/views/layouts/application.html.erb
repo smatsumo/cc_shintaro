@@ -29,23 +29,24 @@
           <% end %>
         </li>  
         <li>
-          <!--出品する-->
-          <p class="sell">
-            <%= link_to products_new_path do %>
-              出品する
-            <% end %>
-          </p>
-        </li>
-        <li>
           <!--マイページ-->
-          <%= link_to profile_edit_path(current_user) do %>
+          <%= link_to top_path(current_user) do %>
               <i class="fa fa-user-circle" aria-hidden="true"></i>
           <% end %>
         </li>
       </ul>
 
     </header>  
+    <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        window.setTimeout(function() {
+            $(".alert").slideUp();
+        }, 3000);
+    </script>
   </body>
 </html>
 

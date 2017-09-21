@@ -53,6 +53,7 @@ class PostsController < ApplicationController
   
   # いいね処理
   def like
+    user=current_user
     @post = Post.find(params[:id])
     if PostLike.exists?(post_id: @post.id, user_id: current_user.id)
       # いいねを削除

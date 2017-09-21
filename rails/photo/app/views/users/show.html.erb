@@ -11,8 +11,16 @@
           <li>
             <div style="background: url('<%= "/images/#{post_image.name}" %>'); background-repeat: no-repeat; background-position: 50%;"></div>
           </li>
+          <%= link_to like_post_path(post) do %>
+                <!--いいねが押されているか押されていないかで表示を変える-->
+                <i class="fa <%= post.like_from?(current_user)? "fa-heart active" : "fa-heart-o" %>"></i>
+              <% end %>
         <% end %>
       <% end %>
       </ul>
   </div>
 </div>
+
+
+<%= yield %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

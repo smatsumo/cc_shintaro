@@ -1,3 +1,6 @@
+  <!-- サイドメニュー部分 -->
+  <%= render partial: 'side_menu' %>
+  
   <div class="profile">
     <div class="image">
       <div style="background: url('<%= image_url(@user) %>'); background-position: 50%; background-size: cover;"></div>
@@ -5,15 +8,6 @@
     <div class="info">
       <div class="name">
         <h1><%= @user.name %></h1>
-        <div class="actions">
-          <% if @user.id == current_user.id %>
-            <div class="edit">
-              <%= link_to "プロフィール編集", profile_edit_path %>
-            </div>
-          <% else %>
-              <%#編集ボタンを表示させない%>
-          <% end %>
-        </div>
       </div>
       <div class="status">
         <p class="products_count">投稿数 <%= @user.products.length %>件</p>

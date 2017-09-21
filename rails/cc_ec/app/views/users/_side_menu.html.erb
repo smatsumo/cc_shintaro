@@ -1,0 +1,48 @@
+<div class="menu">
+    <ul>
+        <li>
+            <!--出品する-->
+            <p>
+                <%= link_to products_new_path do %>
+                  出品する
+                <% end %>
+            </p>
+        </li>
+        <li>
+            <p>
+                <%= link_to item_list_path do %>
+                    商品の一覧
+                <% end %>
+            <p>
+        </li>
+        
+        <li>
+            <p>
+                <%= link_to products_path do %>
+                    出品中の商品
+                <% end %>
+            </p>
+        </li>
+        <li>
+            <p>
+                <%= link_to likes_path do %>
+                    <h2>お気に入りの商品</h2>
+                <% end %>
+            </p>
+        </li>
+        <li>
+            <div class="actions">
+              <% if @user.id == current_user.id %>
+                  <p>
+                    <div class="edit">
+                      <%= link_to "プロフィール編集", profile_edit_path %>
+                    </div>
+                  </p>
+              <% else %>
+                  <%#編集ボタンを表示させない%>
+              <% end %>
+            </div>
+        </li>
+    </ul>
+</div>
+ 

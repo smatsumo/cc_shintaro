@@ -12,4 +12,5 @@ class Post < ApplicationRecord
   def like_from?(user)
     self.post_likes.exists?(user_id: user.id)
   end
+  
 end

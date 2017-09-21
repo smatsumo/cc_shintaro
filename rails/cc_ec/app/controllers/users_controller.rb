@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :redirect_to_top_if_signed_in, only: [:sign_up, :sign_in]
   
   def profiles
-    #byebug
+    #
     @user = current_user
   end
   
@@ -14,6 +14,11 @@ class UsersController < ApplicationController
     @categories=Category.all
   end
   
+  def item_list
+    @user=current_user
+    @products=Product.all
+  end
+  
   #商品出品処理
   def sell_item
     @user= current_user
@@ -21,25 +26,29 @@ class UsersController < ApplicationController
     #temp_paramsはimage1,image2,image3から名前を得て、実際のデータベース登録に必要.
     
     temp_params=upload_image_item(item_params)
-    #byebug
-    @product= Product.new(temp_params.merge({status: 1}))
-    #byebug
-    if @product.save
+    #
+    @product= Product.new(temp_params.merge({status: 1,user_id: @user.id}))
+    #@product= Product.new(item_params)
+    #@product= Product.new()
+    #
+    #product.save!にするとRails側のデータベース関連エラーがサイトに出力されるようになる。
+    if @product.save!
         #productテーブルへの登録成功
-        #byebug
         redirect_to top_path and return
       else
         #product_tableへの登録失敗の為、エラーをだす
-        #byebug
+        #
         flash[:danger] = "データベースへの登録に失敗しました"
         redirect_to products_new_path and return
     end
     
   end
   
+  
   def edit
     @user = current_user
   end
+  
   
   # プロフィール更新処理
   def update
@@ -67,8 +76,21 @@ class UsersController < ApplicationController
     redirect_to top_path and return
   end
   
-  
+  #お気に入り商品の処理
   def likes
+    #byebug
+    @product = Product.find(params[:id])
+    if UserLike.exists?(product_id: @product.id, user_id: current_user.id)
+      # いいねを削除
+      UserLike.find_by(product_id: @product.id, user_id: current_user.id).destroy
+      #redict_toで同じ場所に戻るにはどうすれば良いか？
+      redirect_back(fallback_location: root_path)
+    else
+      # いいねを登録
+      UserLike.create(product_id: @product.id, user_id: current_user.id)
+      #redirect_to top_path and return
+      redirect_back(fallback_location: root_path)
+    end
   end
   
   def products
@@ -109,9 +131,10 @@ class UsersController < ApplicationController
     render layout: "application_not_login"
   end
   
+  
   def sign_up_process
     user = User.new(user_params)
-    #byebug
+    #
     if params[:user][:password]==params[:user][:check_password]
       if user.save
         #データベースへの登録成功
@@ -127,8 +150,8 @@ class UsersController < ApplicationController
       flash[:danger] = "パスワード不一致のため、登録に失敗しました"
       redirect_to sign_up_path and return
     end
-      
   end
+
 
 
   private
@@ -156,10 +179,10 @@ class UsersController < ApplicationController
     end
   end
 
+
   #出品した商品のイメージをアップロードする
   def upload_image_item(image_files)
     new_params=image_files
-    
     #imageは実際の画像なのでファイルネームを取り出したい。
     #image_files.each do |image|
       # type="image"であるもののnameの配列を受け取る
@@ -174,17 +197,22 @@ class UsersController < ApplicationController
       #else
         #アップロードに失敗
       #end
-    #nd
-    
-    #if upload_image(image_files[:image1])
-    #  new_params[:image1]=image_files[:image1].original_filename
-      #new_params.merge({image1: image_files[:image1].original_filename})
     #end
     
+    if upload_image(image_files[:image1])
+      new_params[:image1]=image_files[:image1].original_filename
+    end
     
+    if upload_image(image_files[:image2])
+      new_params[:image2]=image_files[:image2].original_filename
+    end
     
+    if upload_image(image_files[:image3])
+      new_params[:image3]=image_files[:image3].original_filename
+    end
     
     return new_params
+  
   end 
   
 
@@ -202,5 +230,21 @@ class UsersController < ApplicationController
     end
     return false
   end
+  
+    # お気に入り処理
+  def like
+    #user=current_user
+    #@user_like = UserLike.find(current_user.id)
+    #if PostLike.exists?(post_id: @post.id, user_id: current_user.id)
+      # いいねを削除
+      #PostLike.find_by(post_id: @post.id, user_id: current_user.id).destroy
+      #redirect_to top_path and return
+    #else
+      # いいねを登録
+      #PostLike.create(post_id: @post.id, user_id: current_user.id)
+      #redirect_to top_path and return
+    #end
+  end
+  
   
 end
