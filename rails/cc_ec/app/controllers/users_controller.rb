@@ -33,9 +33,10 @@ class UsersController < ApplicationController
     elsif params[:category_id].present?
     #byebug
       @products=Product.where(category_id: params[:category_id])
-    elsif params[:sort].present? &&params[:sort] !=0
+    elsif params[:sort].present? && params[:sort] !=0
       #byebug
-      #@product=sort_item(@product,prams[:sort])
+      @products=sort_item(params[:sort])
+      #byebug
     else
       # 一覧表示処理
       @products=Product.where.not(user_id: current_user.id)
@@ -305,7 +306,19 @@ class UsersController < ApplicationController
   end
   
   
-  
+  def sort_item(sort_num)
+    
+    if sort_num == "1"
+      #byebug
+      return Product.all.order("price desc")
+    elsif sort_num == "2"
+      return Product.all.order("price asc")
+    elsif sort_num == "3"
+      return Product.all.order("created_at desc")
+    else
+      return Product.all.order("created_at asc")
+    end
+  end
 
   
 end
