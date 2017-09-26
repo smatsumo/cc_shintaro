@@ -73,87 +73,144 @@
 
 
 
-  
-  // プロフィール編集部分
-.profile_edit {
-  background-color: white;
-  form {
-    padding: 150px;
-    label {
-      display: inline-block;
-      width: 150px;
+    // プロフィール編集部分
+  .profile_edit {
+    background-color: white;
+    h1{
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 30px;
     }
-    input[type="text"] {
-      width: 500px;
-      height: 30px;
-      font-size: 15px;
-      padding: 8px;
+    form {
+      padding: 100px;
+      label {
+        display: inline-block;
+        width: 150px;
+      }
+      input[type="text"] {
+        width: 500px;
+        height: 30px;
+        font-size: 15px;
+        padding: 8px;
+      }
+      input[type="password"] {
+        width: 500px;
+        height: 30px;
+        font-size: 15px;
+        padding: 8px;
+      }
+      textarea {
+        width: 500px;
+        height: 30px;
+        padding: 8px;
+        border: 1px solid #ccc;
+      }
     }
-    input[type="password"] {
-      width: 500px;
-      height: 30px;
-      font-size: 15px;
-      padding: 8px;
+    .field {
+      margin-bottom: 15px;
     }
-    textarea {
-      width: 500px;
-      height: 30px;
-      padding: 8px;
-      border: 1px solid #ccc;
+    .button_wrap {
+      text-align: center;
     }
-  }
-  .field {
-    margin-bottom: 15px;
-  }
-  .button_wrap {
-    text-align: center;
-  }
-  .button {
-    background-color: #0097EF;
-    color: white;
-    border: 1px solid darken(#0097EF, 3%);
-    border-radius: 3px;
-    font-size: 13px;
-    padding: 8px 12px;
-    text-decoration: none;
-    opacity: 0.9;
-    cursor: pointer;
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
-
-
-  // プロフィール部分
-  .profile {
-    width:500px;
-    margin-top: 100px;
-    margin-left: 100px;
-    padding-top: 60px;
-    padding: 60px 40px 40px;
-    display: flex;
-    .image {
-      width: 200px;
-      margin-right: 50px;
-      >div {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
+    .button {
+      background-color: #0097EF;
+      color: white;
+      border: 1px solid darken(#0097EF, 3%);
+      border-radius: 3px;
+      font-size: 13px;
+      padding: 8px 12px;
+      text-decoration: none;
+      opacity: 0.9;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
       }
     }
   }
   
-  //サイドメニュー部分
-  .side_menu{
-    width:150px;
-    height:300px;
-    border: 3px solid black;
-    #display:flex;
-    margin-left:auto;
-    margin-right: 200px;
-    margin-top: 100px;
-    padding-right: 100px;
-  }
+  
+  
+  
+  .main_container{
+    display: flex;
+    margin-top: 81px;
+    height: 1200px;
+    width: 1200px;
+    .name{
+      width: 900px;
+      font-size: 30px;
+      text-align: center;
+    }
+    //サイドメニュー部分
+    .side_menu{
+      display: flex;
+      width: 300px;
+      height: 300px;
+      margin: 0px;
+      padding: 0px;
+      flex-direction:  row-reverse;
+      //flex-wrap: row;
+      li{
+        a{
+          text-decoration: none;
+          font-size: 30px;
+        }
+        padding-bottom: 20px;
+        text-align: center;
+      }
+      
+    }
+    .main-wrapper{
+      width: 900px;
+      height: 900px;
+      display: flex;
+       // プロフィール画像部分
+      .profile {
+        display: flex;
+        flex-direction: row;
+        .image {
+          >div {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+          }
+        }
+      }
+      
+      .info{
+        >div{
+          text-align: left;
+          font-size: 30px;
+        }
 
-
+      }
+      
+      
+      
+    
+      /*.product-wrapper{
+        //display:flex;
+      }*/
+      // プロダクト部分
+      .product {
+        width: 300px;
+        height: 300px;
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        flex-direction:  row;
+        img {
+          //width: 200px;
+          //margin-right: 50px;
+            width: 200px;
+            height: 200px;
+          
+        }
+        .image{
+          width: 200px;
+          height: 200px;
+        }
+        
+      }
+    }
+}

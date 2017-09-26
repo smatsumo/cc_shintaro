@@ -46,5 +46,18 @@ module UsersHelper
       end
     end
     
+    # 商品画像がなかったらダミー画像を指定する
+    def image_url_product(product)
+      if product.image1.present?
+        "/images/#{product.image1}"
+      elsif product.image2.present?
+        "/images/#{product.image2}"
+      elsif product.image3.present?
+        "/images/#{product.image3}"
+      else
+        "https://dummyimage.com/200x200/000/fff"
+      end
+    end
+    
     
 end

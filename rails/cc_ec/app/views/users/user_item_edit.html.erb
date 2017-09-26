@@ -1,0 +1,54 @@
+<!--ユーザーが出品したアイテムを編集するページ-->
+<!DOCTYPE html>
+<html> 
+      <head>
+        <title>CodeCamp_EC</title>
+        <%= csrf_meta_tags %>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+      </head>
+    <div class="main_container">
+      <div class="profile_edit container">
+        
+      <%= form_for @product, url: item_edit_path(@product) do |f| %>
+       <h1>商品編集ページ</h1>
+        <div class="field">
+          <%= f.label "商品名" %>
+          <%#new_nameなどにしたい場合はどうすれば良いのか？%>
+          <%= f.text_field :name, placeholder: "商品名を入力して下さい。" %>
+        </div>
+        <div class="field">
+          <%= f.label :description, "商品紹介文" %>
+          <%= f.text_field :description, placeholder: "商品紹介文をどうぞ" %>
+        </div>
+        <div class="field">
+          <%= f.label "価格" %>
+          <%= f.text_field :price, placeholder: "商品価格を入力してください。" %>
+        </div>
+        <div class="field">
+          <%= f.label "カテゴリー" %>
+          <%= f.collection_select :category_id,@categories,:id,:name%>
+        </div>
+        <div class="field">
+          <label>商品画像1</label>
+          <div class="file_wrap">
+            <%= f.file_field :image1 %>
+          </div>
+          <label>商品画像2</label>
+          <div class="file_wrap">
+            <%= f.file_field :image2 %>
+          </div>
+          <label>商品画像3</label>
+          <div class="file_wrap">
+            <%= f.file_field :image3 %>
+          </div>
+        </div>
+        <div class="button_wrap">
+          <input type="submit" value="保存する" class="button">
+        </div>
+      <% end %>
+      </div>
+    </div>
+
+</html>

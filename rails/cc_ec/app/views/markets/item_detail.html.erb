@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>CodeCamp_EC</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+  </head>
+  <body>
+      <div class="image">
+          <%= image_tag "/images/#{@product.image1}"%>
+      </div>
+      <div class="button_wrap">
+          <%=link_to payment_path(@product) do %>
+              <button>購入する</button>
+          <%end%>
+      </div>
+   </body>
+</html>

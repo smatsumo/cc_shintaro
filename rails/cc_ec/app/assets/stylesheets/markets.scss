@@ -1,3 +1,23 @@
 // Place all the styles related to the markets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.logined{
+  margin-top: 82px;
+}
+// プロダクト部分
+  .image {
+    width: 300px;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-top: 0px;
+    padding: 0px 0px 0px;
+    display: flex;
+    img {
+      //width: 200px;
+      //margin-right: 50px;
+        width: 500px;
+        height: 500px;
+      
+    }
+  }

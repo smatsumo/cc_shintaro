@@ -1,18 +1,25 @@
+<!--サインイン後に表示されるユーザーのプロファイルページ-->
+
+
+<div class="main_container">  
+
   <!-- サイドメニュー部分 -->
   <%= render partial: 'side_menu' %>
-  
-  <div class="profile">
-    <div class="image">
-      <div style="background: url('<%= image_url(@user) %>'); background-position: 50%; background-size: cover;"></div>
-    </div>
-    <div class="info">
-      <div class="name">
-        <h1><%= @user.name %></h1>
+  <div class="main-wrapper">
+    <div class="profile">
+      <div class="image">
+        <div style="background: url('<%= image_url(@user) %>'); background-position: 50%; background-size: cover; width: 300px; height: 300px;"></div>
       </div>
-      <div class="status">
-        <p class="products_count">投稿数 <%= @user.products.length %>件</p>
-      <div class="comment">
-        <%= @user.profile %>
+      <div class="info">
+        <div class="name">
+          <h1><%= @user.name %></h1>
+        </div>
+        <div class="status">
+          <p class="products_count">投稿数 <%= @user.products.length %>件</p>
+        <div class="comment">
+          <%= @user.profile %>
+        </div>
       </div>
     </div>
   </div>
+</div>

@@ -20,8 +20,19 @@ class User < ApplicationRecord
   end
   
   # 投稿が特定のユーザーにいいね！されているかどうかを判定
-  def check_like(user)
-    self.user_likes.exists?(user_id: user.id)
+  def check_like(product)
+    self.user_likes.exists?(product_id: product.id)
+  end
+  
+  def check_image(product,image_attribute)
+    #self.products.exist?(id: product.id, #{image_attribute: image_path})
+    if image_attribute==1
+      self.products.exists?(id: product.id, image1: product.image1)
+    elsif image_attribute==2
+      self.products.exists?(id: product.id, image2: product.image2)
+    else
+      self.products.exists?(id: product.id, image3: product.image3)
+    end
   end
   
   # バリデーション

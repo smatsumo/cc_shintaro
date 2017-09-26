@@ -1,2 +1,34 @@
-<h1>Users#products</h1>
-<p>Find me in app/views/users/products.html.erb</p>
+<!--ユーザーが出品している商品の一覧ページ-->
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>CodeCamp_EC</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+  </head>
+<div class="main_container"> 
+  <!-- サイドメニュー部分 -->
+  <%= render partial: 'side_menu' %>
+  
+  <!-- 商品画像部分 -->
+  <!--後にキーワード検索や価格表示をするとこちらのページを変える必要がある。-->
+    <div class="main-wrapper">
+      <ul>
+        <% @products.each do |p| %>
+            <li>
+              <div class="product">
+                <div class="product_name"><%= p.name %></div>
+                <%= link_to user_item_detail_path(p) do %>
+                  <div class="image">
+                      <%= image_tag "/images/#{p.image1}"%>
+                  </div>
+                <%end%>
+              </div>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+</div>
+</html>

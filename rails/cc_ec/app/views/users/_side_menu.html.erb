@@ -1,4 +1,4 @@
-<div class="menu">
+<div class="side_menu">
     <ul>
         <li>
             <!--出品する-->
@@ -11,7 +11,7 @@
         <li>
             <p>
                 <%= link_to item_list_path do %>
-                    商品の一覧
+                    販売中の商品の一覧
                 <% end %>
             <p>
         </li>
@@ -25,7 +25,7 @@
         </li>
         <li>
             <p>
-                <%= link_to likes_path do %>
+                <%= link_to likes_item_list_path do %>
                     <h2>お気に入りの商品</h2>
                 <% end %>
             </p>

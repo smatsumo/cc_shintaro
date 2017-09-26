@@ -15,10 +15,7 @@
       <%= link_to top_path do %>
         <h1 class="logo">CodeCamp_EC</h1>
       <% end %>
-      <!-- 検索フォーム -->
-      <form class="search">
-        <input type="text" placeholder="検索ワードを入力" name="word" value="">
-      </form>
+
       
       <!--メニュー-->
       <ul class="menu">
@@ -40,7 +37,13 @@
     <% flash.each do |type, message| %>
     <div class="alert alert-<%= type %>"><%= message %></div>
     <% end %>
+    <%if false%>
+    <div class="wrap"> <!--width:100%;-->
+      <div class="inner"> <!--width:1280px; margin:0 auto;コンテンツ全体中央寄せ -->
+    <%end%>
     <%= yield %>
+      </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         window.setTimeout(function() {

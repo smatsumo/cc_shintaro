@@ -1,0 +1,43 @@
+<!--お気に入り商品のページ 未実装なので後に実装する予定-->
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>CodeCamp_EC</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+  </head>
+ 
+  <div class="main_container">
+  <!-- サイドメニュー部分 -->
+    <%= render partial: 'side_menu' %>
+    
+    <!-- 商品画像部分 -->
+    <!--後にキーワード検索や価格表示をするとこちらのページを変える必要がある。-->
+      <div class="main-wrapper">
+        <ul>
+          <% @products.each do |p| %>
+            <div class="product">
+                <li>
+                  <div class="product_name"><%= p.name %></div>
+                  
+                  <div class="image">
+                  <%= image_tag "/images/#{p.image1}"%>
+                  </div>
+                  <div class="price"><%= p.price %></div>
+                  <div class="like">
+                    <!--いいねが押されているか押されていないかで表示を変える-->
+                    <%= link_to likes_path(p) do %>
+                      <i class="fa <%= @user.check_like(p)? "fa-heart active" : "fa-heart-o" %>"></i>
+                    <%end%>
+                  </div>
+                </li>
+            </div>
+          <% end %>
+        </ul>
+      </div>
+  </div>
+    
+    
+</html>

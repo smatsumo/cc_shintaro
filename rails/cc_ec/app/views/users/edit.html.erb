@@ -1,6 +1,8 @@
+<!--ユーザーの登録変更ページ-->
 <div class="profile_edit container">
- 
+   
   <%= form_for @user, url: profile_edit_path do |f| %>
+  <h1>ユーザー登録情報変更</h1>
     <div class="field">
       <%= f.label "名前" %>
       <%#new_nameなどにしたい場合はどうすれば良いのか？%>

@@ -1,37 +1,39 @@
-<div class="menu">
+<div class="side_menu">
     <ul>
-        <!--キーワード-->
+        <form class="search">
+        <!--キーワード検索-->
         <li>
-            <p>
-                <%= link_to name_search_path do %>
-                  出品する
-                <% end %>
-            </p>
+          　 <!-- 検索フォーム -->
+          　 <p>検索ワード</p>
+             <input type="text" placeholder="検索ワードを入力" name="word" value="">
+            
         </li>
-        <!--カテゴリー-->
+        
+        <!--カテゴリー検索-->
         <li>
-            <p>
-                <%= link_to category_seach_path do %>
-                    商品の一覧
-                <% end %>
-            <p>
+          <%#= f.label "カテゴリー" %>
+          <%#= f.collection_select :category_id,@categories,:id,:name%>
+          
+            <%= form_tag item_list_path, :method => 'get' do %>
+                <%= select_tag :category_id, options_for_select([["カテゴリー選択してください。", nil]] + Category.all.collect {|x| [x.name, x.id]}),{} %>
         </li>
-        <!--価格-->
+        
+        <!--価格検索-->
+        <p>価格検索</p>
+            <input type="text" placeholder="lowest" name="lowest" value="">
+            <input type="text" placeholder="highest" name="highest" value="">
         <li>
-            <p>
-                <%= link_to price_search_path do %>
-                    出品中の商品
-                <% end %>
-            </p>
         </li>
-        <!--並び替え-->
+        <!--並び替え順-->
+        <p>並び替え</p>
+        <%#= select_tag :sort, [ ["",0],["値段の高い順", 1], ["値段の低い順", 2],["出品の新しい順", 3],["出品の古い順", 4] ] %>
+        <%= select_tag(:sort, options_for_select([ ["",0],["値段の高い順", 1], ["値段の低い順", 2],["出品の新しい順", 3],["出品の古い順", 4] ])) %>
         <li>
-            <p>
-                <%= link_to order_path do %>
-                    <h2>お気に入りの商品</h2>
-                <% end %>
-            </p>
+
         </li>
+        <input type="submit" name="submit" value="検索">
+        <%end%>
+        </form>
     </ul>
 </div>
  

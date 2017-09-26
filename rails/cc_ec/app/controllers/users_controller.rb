@@ -2,8 +2,9 @@ class UsersController < ApplicationController
   before_action :authorize, except: [:sign_up, :sign_up_process, :sign_in, :sign_in_process]
   before_action :redirect_to_top_if_signed_in, only: [:sign_up, :sign_in]
   
+  
+  #サインイン後のトップページ及びユーザーページの表示
   def profiles
-    #
     @user = current_user
   end
   
@@ -14,9 +15,33 @@ class UsersController < ApplicationController
     @categories=Category.all
   end
   
+  #現在販売中の商品ページの表示
+  #事前に自分が出品したプロダクトを除いて検索をしたい場合はどうすれば良いか？
   def item_list
     @user=current_user
-    @products=Product.all
+    
+    @categories=Category.all
+    #byebug
+    # キーワード検索処理
+    if params[:word].present?
+      @products=Product.where("name like ?", "%#{params[:word]}%").order("id desc")
+    elsif params[:highest].present? && params[:lowest].present?
+      #byebug
+      @products=Product.where(price: params[:lowest]..params[:highest])
+      #.not(user_id: current_user.id)
+      
+    elsif params[:category_id].present?
+    #byebug
+      @products=Product.where(category_id: params[:category_id])
+    elsif params[:sort].present? &&params[:sort] !=0
+      #byebug
+      #@product=sort_item(@product,prams[:sort])
+    else
+      # 一覧表示処理
+      @products=Product.where.not(user_id: current_user.id)
+    end
+    
+    
   end
   
   #商品出品処理
@@ -26,7 +51,7 @@ class UsersController < ApplicationController
     #temp_paramsはimage1,image2,image3から名前を得て、実際のデータベース登録に必要.
     
     temp_params=upload_image_item(item_params)
-    #
+    
     @product= Product.new(temp_params.merge({status: 1,user_id: @user.id}))
     #@product= Product.new(item_params)
     #@product= Product.new()
@@ -44,9 +69,33 @@ class UsersController < ApplicationController
     
   end
   
-  
+  #プロフィール編集のページ
   def edit
     @user = current_user
+  end
+  
+  #出品した商品の詳細を表示する　/users/products/(:id)
+  def user_item_detail
+    @user =current_user
+    #byebug
+    @product=Product.find_by(id: params[:id])
+    #@categories=Category.all
+    #byebug
+  end
+  
+  #出品した個別アイテムの編集ページの表示 /users/products/{id}/edit
+  def user_item_edit
+    @user = current_user
+    @product=Product.find_by(id: params[:id])
+    @categories=Category.all
+  end
+  
+  #出品した商品の編集処理
+  def item_edit
+    @product = Product.find_by(params[:id])
+    new_params = upload_image_item(item_params)
+    @product.update(new_params)
+    redirect_to top_path and return
   end
   
   
@@ -93,15 +142,22 @@ class UsersController < ApplicationController
     end
   end
   
+  
+  #ユーザーが登録している商品一覧ページ /products
   def products
+    @user=current_user
+    @products = Product.where(user_id: current_user.id)
+    #byebug
   end
   
+  #サインインページ
   def sign_in
     #モデルのインスタンス化をしている 
     @user = User.new
     render layout: "application_not_login"
   end
   
+  #サインインの機能
   def sign_in_process
     # パスワードをmd5に変換
     password_md5 = User.generate_password(user_params[:password]) 
@@ -117,7 +173,7 @@ class UsersController < ApplicationController
       redirect_to sign_in_path and return
     end
   end
-  
+  #サインアウト
   def sign_out
     # ユーザーセッションを破棄
     user_sign_out
@@ -125,13 +181,13 @@ class UsersController < ApplicationController
     redirect_to sign_in_path and return
   end
   
-  
+  #ユーザー登録ページ
   def sign_up
     @user = User.new
     render layout: "application_not_login"
   end
   
-  
+  #ユーザー登録処理
   def sign_up_process
     user = User.new(user_params)
     #
@@ -152,6 +208,21 @@ class UsersController < ApplicationController
     end
   end
 
+  #お気に入り商品ページ
+  def likes_list
+    @user=current_user
+    #like_id=UserLike.where(user_id: current_user.id)
+    #byebug
+    @products=Product.where(id: UserLike.where(user_id: current_user.id).pluck(:product_id))
+  end
+
+
+
+
+
+
+
+
 
 
   private
@@ -163,12 +234,14 @@ class UsersController < ApplicationController
     params.require(:product).permit(:name,:description,:price,:category_id,:image1,:image2,:image3)
   end
   
+
   #ユーザープロファイルのアップデート
   def update_profile(new_user_params)
     upload_file = params[:user][:image]
     update_image_profile(upload_file,new_user_params)
   end
   
+  #ユーザーのイメージのアップデート処理
   #シンボルを渡したい場合はどうすれば良いか？ 現在はitemとuser_paramsの両方に対応している　
   #プロファイルの中のイメージ画像をアップデートする
   def update_image_profile(file,new_params)
@@ -231,20 +304,8 @@ class UsersController < ApplicationController
     return false
   end
   
-    # お気に入り処理
-  def like
-    #user=current_user
-    #@user_like = UserLike.find(current_user.id)
-    #if PostLike.exists?(post_id: @post.id, user_id: current_user.id)
-      # いいねを削除
-      #PostLike.find_by(post_id: @post.id, user_id: current_user.id).destroy
-      #redirect_to top_path and return
-    #else
-      # いいねを登録
-      #PostLike.create(post_id: @post.id, user_id: current_user.id)
-      #redirect_to top_path and return
-    #end
-  end
   
+  
+
   
 end
