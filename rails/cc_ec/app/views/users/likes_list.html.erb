@@ -11,31 +11,39 @@
  
   <div class="main_container">
   <!-- サイドメニュー部分 -->
-    <%= render partial: 'side_menu' %>
+    <%= render partial: 'layouts/side_menu' %>
     
     <!-- 商品画像部分 -->
     <!--後にキーワード検索や価格表示をするとこちらのページを変える必要がある。-->
       <div class="main-wrapper">
-        <ul>
-          <% @products.each do |p| %>
-            <div class="product">
-                <li>
-                  <div class="product_name"><%= p.name %></div>
-                  
-                  <div class="image">
-                  <%= image_tag "/images/#{p.image1}"%>
-                  </div>
-                  <div class="price"><%= p.price %></div>
-                  <div class="like">
-                    <!--いいねが押されているか押されていないかで表示を変える-->
-                    <%= link_to likes_path(p) do %>
-                      <i class="fa <%= @user.check_like(p)? "fa-heart active" : "fa-heart-o" %>"></i>
+        <%if @products.any? %>
+          <ul>
+            <% @products.each do |p| %>
+              <div class="product">
+                  <li>
+                    <div class="product_name"><%= p.name %></div>
+                    <%= link_to item_detail_path(p) do %>
+                      <%= link_to item_detail_path(p) do %>
+                        <div class="image" style="background: url('<%= image_url_product(p) %>'); background-position: 50%; background-size: cover;"></div>
+                      <%end%>
+                    <div class="product_footer">
+                      <div class="price"><%= p.price %>円</div>
+                      <div class="like">
+                        <!--いいねが押されているか押されていないかで表示を変える-->
+                        <%= link_to likes_path(p) do %>
+                          <i class="fa <%= @user.check_like(p)? "fa-heart active" : "fa-heart-o" %>"></i>
+                        <%end%>
+                      </div>
+                    </div>
                     <%end%>
-                  </div>
-                </li>
-            </div>
-          <% end %>
-        </ul>
+                  </li>
+              </div>
+            <% end %>
+          </ul>
+          <div><%= paginate @products %></div>
+        <%else%>
+          <p class="empty">お気に入り商品が存在しません。</p>
+        <%end%>
       </div>
   </div>
     

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post '/sign_up',to:'users#sign_up_process'
   get '/sign_out', to:'users#sign_out', as: :sign_out
   get '/markets/(:id)',to:'markets#item_detail', as: :item_detail
-  get '/markets/(:id)/payment',to:'markets#payment', as: :payment
+  post '/markets/(:id)/payment',to:'markets#payment', as: :payment
   get '/profiles/edit', to:'users#edit',as: :profile_edit
   patch 'profiles/edit', to:'users#update'
   get '/profiles', to:'users#profiles', as: :top

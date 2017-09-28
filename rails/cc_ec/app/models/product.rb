@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :category
   belongs_to :user
-  
+  paginates_per 9
   # バリデーション
   
   validates :name, presence: true

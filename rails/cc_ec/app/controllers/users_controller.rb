@@ -24,22 +24,23 @@ class UsersController < ApplicationController
     #byebug
     # キーワード検索処理
     if params[:word].present?
-      @products=Product.where("name like ?", "%#{params[:word]}%").order("id desc")
+      @products=Product.where("name like ?", "%#{params[:word]}%").order("id desc").page(params[:page])
     elsif params[:highest].present? && params[:lowest].present?
       #byebug
-      @products=Product.where(price: params[:lowest]..params[:highest])
+      @products=Product.where(price: params[:lowest]..params[:highest]).page(params[:page])
       #.not(user_id: current_user.id)
       
     elsif params[:category_id].present?
     #byebug
-      @products=Product.where(category_id: params[:category_id])
+      @products=Product.where(category_id: params[:category_id]).page(params[:page])
     elsif params[:sort].present? && params[:sort] !=0
       #byebug
-      @products=sort_item(params[:sort])
+      @products=sort_item(params[:sort]).page(params[:page])
       #byebug
     else
       # 一覧表示処理
-      @products=Product.where.not(user_id: current_user.id)
+      @products=Product.where.not(user_id: current_user.id).page(params[:page])
+      #byebug
     end
     
     
@@ -58,13 +59,13 @@ class UsersController < ApplicationController
     #@product= Product.new()
     #
     #product.save!にするとRails側のデータベース関連エラーがサイトに出力されるようになる。
-    if @product.save!
+    if @product.save
         #productテーブルへの登録成功
         redirect_to top_path and return
       else
         #product_tableへの登録失敗の為、エラーをだす
         #
-        flash[:danger] = "データベースへの登録に失敗しました"
+        flash[:danger] = "必須情報の未記入があった為、登録に失敗しました"
         redirect_to products_new_path and return
     end
     
@@ -93,7 +94,7 @@ class UsersController < ApplicationController
   
   #出品した商品の編集処理
   def item_edit
-    @product = Product.find_by(params[:id])
+    @product = Product.find_by(id: params[:id])
     new_params = upload_image_item(item_params)
     @product.update(new_params)
     redirect_to top_path and return
@@ -147,7 +148,7 @@ class UsersController < ApplicationController
   #ユーザーが登録している商品一覧ページ /products
   def products
     @user=current_user
-    @products = Product.where(user_id: current_user.id)
+    @products = Product.where(user_id: current_user.id).page(params[:page])
     #byebug
   end
   
@@ -199,7 +200,7 @@ class UsersController < ApplicationController
         redirect_to top_path and return
       else
         #データベースへの登録失敗の為、エラーをだす
-        flash[:danger] = "データベースへの登録に失敗しました"
+        flash[:danger] = "必要科目の欄で未記入があった為、登録に失敗しました"
         redirect_to sign_up_path and return
       end
     else
@@ -209,12 +210,12 @@ class UsersController < ApplicationController
     end
   end
 
-  #お気に入り商品ページ
+  #お気に入り商品一覧ページ
   def likes_list
     @user=current_user
     #like_id=UserLike.where(user_id: current_user.id)
     #byebug
-    @products=Product.where(id: UserLike.where(user_id: current_user.id).pluck(:product_id))
+    @products=Product.where(id: UserLike.where(user_id: current_user.id).pluck(:product_id)).page(params[:page])
   end
 
 
@@ -310,13 +311,13 @@ class UsersController < ApplicationController
     
     if sort_num == "1"
       #byebug
-      return Product.all.order("price desc")
+      return Product.all.order("price desc").page(params[:page])
     elsif sort_num == "2"
-      return Product.all.order("price asc")
+      return Product.all.order("price asc").page(params[:page])
     elsif sort_num == "3"
-      return Product.all.order("created_at desc")
+      return Product.all.order("created_at desc").page(params[:page])
     else
-      return Product.all.order("created_at asc")
+      return Product.all.order("created_at asc").page(params[:page])
     end
   end
 

@@ -1,3 +1,4 @@
+<!--商品購入ページ-->
 <!DOCTYPE html>
 <html> 
   <head>
@@ -7,14 +8,49 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
   </head>
-  <body>
-      <div class="image">
-          <%= image_tag "/images/#{@product.image1}"%>
+  <div class="main_container">
+    <%= render partial: 'layouts/side_menu' %>
+    <div class="main-wrapper">
+      <div class= "name"><%= @product.name %></div>
+      <ul>
+      <div class= "product">
+        <div class="image" style="background: url('<%= image_url_product(@product) %>'); background-position: 50%; background-size: cover;"></div>
       </div>
-      <div class="button_wrap">
-          <%=link_to payment_path(@product) do %>
-              <button>購入する</button>
-          <%end%>
+        <% if @user.check_image(@product,2)%>
+          <div class="product">
+            <li>
+              <%= link_to item_edit_page_path(@product) do %>
+                <div class="image">
+                  <%= image_tag "/images/#{@product.image2}"%>
+                </div>
+              <%end%>
+            </li>
+          </div>
+        <%end%>
+        <% if @user.check_image(@product,3)%>
+            <div class="product">
+               <li>
+                  <%= link_to item_edit_page_path(@product) do %>
+                     <div class="image">
+                        <%= image_tag "/images/#{@product.image3}"%>
+                      </div>
+                  <%end%>
+                </li>
+            </div>
+        <%end%>
+      </ul>
+      <div class="details">
+        <div class="price"><%= @product.price %>円</div>
+        <div class="comment"><%= @product.description %></div>
+        <%if @product.status==1 %>
+          <div class="button_wrap">
+              <%=link_to payment_path(@product) , method: :post do %>
+                  <input type="submit" value="購入する" class="button">
+              <%end%>
+          </div>
       </div>
-   </body>
+      <%else%>
+        <p>この商品は現在売り切れです</p>
+      <%end%>
+  </div>
 </html>

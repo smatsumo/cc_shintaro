@@ -1,47 +1,53 @@
-<!--ユーザーが出品した商品の詳細ページ　３つの画像を表示させなければならない。-->
+<!--ユーザーが出品した商品の詳細ページ-->
 <div class="main_container">
   <!-- サイドメニュー部分 -->
-  <%= render partial: 'side_menu' %>
+  <%= render partial: 'layouts/side_menu' %>
   
   <!-- 商品画像部分 -->
   <!--後にキーワード検索や価格表示をするとこちらのページを変える必要がある。-->
     <div class="main-wrapper">
+      <div class="product_name"><%= @product.name %></div>
       <ul>
-            <li>
-              <div class="product_name"><%= @product.name %></div>
-                <% if @user.check_image(@product,1)%>
-                  <div class="product">
-                    <%= link_to item_edit_page_path(@product) do %>
-                      <div class="image">
-                          <%= image_tag "/images/#{@product.image1}"%>
-                      </div>
-                    <%end%>
-                  </div>
-                <%end%>
+        <div class="product">
+          <li>
+            <%= link_to item_edit_page_path(@product) do %>
+              <div class="image" style="background: url('<%= image_url_product(@product) %>'); background-position: 50%; background-size: cover;"></div>
+            <%end%>
+          </li>
+            </div>
                 <% if @user.check_image(@product,2)%>
                   <div class="product">
-                    <%= link_to item_edit_page_path(@product) do %>
-                      <div class="image">
-                          <%= image_tag "/images/#{@product.image2}"%>
-                      </div>
-                    <%end%>
+                    <li>
+                      <%= link_to item_edit_page_path(@product) do %>
+                        <div class="image">
+                            <%= image_tag "/images/#{@product.image2}"%>
+                        </div>
+                      <%end%>
+                    </li>
                   </div>
                 <%end%>
                 <% if @user.check_image(@product,3)%>
                   <div class="product">
-                    <%= link_to item_edit_page_path(@product) do %>
-                      <div class="image">
-                          <%= image_tag "/images/#{@product.image3}"%>
-                      </div>
-                    <%end%>
+                    <li>
+                      <%= link_to item_edit_page_path(@product) do %>
+                        <div class="image">
+                            <%= image_tag "/images/#{@product.image3}"%>
+                        </div>
+                      <%end%>
+                    </li>
                   </div>
                 <%end%>
-              <div class="button_wrap">
-                  <%=link_to item_edit_page_path(@product) do %>
-                      <button>編集する</button>
-                  <%end%>
-              </div>
+              
             </li>
       </ul>
+      <div class="details">
+        <div class="price"><%=@product.price%>円</div>
+        <div class="comment"><%= @product.description %></div>
+        <div class="button_wrap">
+        <%=link_to item_edit_page_path(@product) do %>
+          <input type="submit" value="編集する" class="button">
+        <%end%>
+        </div>
+      </div>
     </div>
 </div>

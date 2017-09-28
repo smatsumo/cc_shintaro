@@ -3,21 +3,157 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .logined{
-  margin-top: 82px;
+  margin-top: 80px;
+  width: 1000px;
+  height: 1200px;
 }
-// プロダクト部分
-  .image {
-    width: 300px;
-    margin-top: 0px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding: 0px 0px 0px;
+html{
+  width: 1200px;
+  height: 1000px;
+}
+
+
+.main_container{
+    background-color: white;
     display: flex;
-    img {
-      //width: 200px;
-      //margin-right: 50px;
-        width: 500px;
-        height: 500px;
+    margin-top: 100px;
+    height: 1000px;
+    width: 1200px;
+    margin: 0 auto;
+    
+    flex-direction: row-reverse;
+    .name{
+      width: 600px;
+      font-size: 30px;
+      text-align: center;
+    }
+    //サイドメニュー部分
+    .side_menu{
+      //display: flex;
+      width: 300px;
+      height: 300px;
+      margin: 0px;
+      padding: 0px;
+      flex-direction:  row;
+      border: solid 5px black;
+      //flex-wrap: row;
+      li{
+        border-bottom: 4.5px solid black;
+        a{
+          text-decoration: none;
+          font-size: 30px;
+        }
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+      }
+      .search{
+        text-align: center;
+        input[type="text"]{  
+          height: 30px;
+        }
+        .price{
+          width: 125px;
+        }
+        .search_bar{
+          width: 250px;
+        }
+      }
       
+    }
+    
+    //検索メニュー部分
+    .search_menu{
+      //display: flex;
+      width: 300px;
+      height: 300px;
+      margin: 0px;
+      padding: 0px;
+      flex-direction:  row;
+      border: solid 5px black;
+      //flex-wrap: row;
+      li{
+        a{
+          text-decoration: none;
+          font-size: 30px;
+        }
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+      }
+      .search{
+        text-align: center;
+        input[type="text"]{  
+          height: 30px;
+        }
+        .price{
+          width: 125px;
+        }
+        .search_bar{
+          width: 250px;
+        }
+      }
+      
+    }
+    
+    
+    .main-wrapper{
+      width: 900px;
+      height: 900px;
+      ul{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+      }
+       // プロフィール画像部分
+      .profile {
+        display: flex;
+        flex-direction: row;
+        .image {
+          >div {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+          }
+        }
+      }
+      
+      .info{
+        >div{
+          text-align: left;
+          font-size: 30px;
+        }
+
+      }
+      
+      
+      
+    
+      /*.product-wrapper{
+        //display:flex;
+      }*/
+      // プロダクト部分
+      .product {
+        border: 2px solid #eee;
+        padding: 30px;
+        padding-left: 50px;
+        width: 300px;
+        height: 300px;
+        margin: 0px;
+        display: flex;
+        flex-direction:  row;
+        img {
+          //width: 200px;
+          //margin-right: 50px;
+            width: 200px;
+            height: 200px;
+          
+        }
+        .image{
+          width: 200px;
+          height: 200px;
+        }
+      }
     }
   }
