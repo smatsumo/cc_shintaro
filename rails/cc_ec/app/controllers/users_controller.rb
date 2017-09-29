@@ -25,6 +25,8 @@ class UsersController < ApplicationController
     # キーワード検索処理
     if params[:word].present?
       @products=Product.where("name like ?", "%#{params[:word]}%").order("id desc").page(params[:page])
+      #last_result=@products
+      #byebug
     elsif params[:highest].present? && params[:lowest].present?
       #byebug
       @products=Product.where(price: params[:lowest]..params[:highest]).page(params[:page])

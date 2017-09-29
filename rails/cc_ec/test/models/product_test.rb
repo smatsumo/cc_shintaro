@@ -8,7 +8,6 @@ class ProductTest < ActiveSupport::TestCase
   test "data insert fault" do
     product = Product.new
     assert_not product.save
-    
   end
   
   
